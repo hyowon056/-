@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>마법 총력전</title>
+
+<style>
+body {
+  margin: 0;
+  padding: 24px;
+  background: #0f0f0f;
+  color: #eaeaea;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 32px;
+  font-size: 28px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+li {
+  padding: 14px 12px;
+  border-bottom: 1px solid #2a2a2a;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+li.read {
+  opacity: 0.4;
+}
+</style>
+</head>
+
+<body>
+
+<h1>마법 총력전</h1>
+
+<ul id="episodeList"></ul>
+
+<script>
+// =======================
+// 회차 데이터 (여기만 수정)
+// =======================
+const episodes = [
+  { id: 1, title: "프롤로그", file: "episodes/ep1.html" },
+  { id: 2, title: "마법이 뭐에요?", file: "episodes/ep2.html" }
+  { id: 3, title: "내가 마법사 였다고?", file: "episodes/ep3.html" }
+  { id: 4, title: "진짜에요?", file: "episodes/ep4.html" }
+  ];
+
+// =======================
+// 본 회차 불러오기
+// =======================
+const readEpisodes = JSON.parse(
+  localStorage.getItem("readEpisodes") || "[]"
+);
+
+// =======================
+// 목차 생성
+// =======================
+const list = document.getElementById("episodeList");
+
+episodes.forEach(ep => {
+  const li = document.createElement("li");
+  if (readEpisodes.includes(ep.id)) {
+    li.classList.add("read");
+  }
+
+  const a = document.createElement("a");
+  a.href = ep.file;
+  a.textContent = `${ep.id}화. ${ep.title}`;
+
+  li.appendChild(a);
+  list.appendChild(li);
+});
+</script>
+
+</body>
+</html>
